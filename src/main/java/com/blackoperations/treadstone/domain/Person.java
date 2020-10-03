@@ -1,8 +1,6 @@
 package com.blackoperations.treadstone.domain;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +12,9 @@ import java.time.LocalDate;
 @Setter
 //@ToString(exclude = "phoneNumber")
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@RequiredArgsConstructor
 public class Person {
 
     // Person객체 PK 아이디 자동생성
@@ -21,8 +22,10 @@ public class Person {
     @GeneratedValue
     private Long id;
 
+    @NonNull
     private String name;
 
+    @NonNull
     private int age;
 
     private String hobby;
