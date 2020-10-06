@@ -8,13 +8,15 @@ import javax.persistence.Id;
 import java.time.LocalDate;
 
 @Entity
-@Getter
-@Setter
+//@Getter
+//@Setter
 //@ToString(exclude = "phoneNumber")
-@ToString
+//@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @RequiredArgsConstructor
+//@EqualsAndHashCode
+@Data
 public class Person {
 
     // Person객체 PK 아이디 자동생성
@@ -30,6 +32,7 @@ public class Person {
 
     private String hobby;
 
+    @NonNull
     private String bloodType;
 
     private String address;
