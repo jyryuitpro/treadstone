@@ -43,4 +43,6 @@ public class Person {
 
     @ToString.Exclude
     private String phoneNumber;
+
+    private boolean block;
 }
