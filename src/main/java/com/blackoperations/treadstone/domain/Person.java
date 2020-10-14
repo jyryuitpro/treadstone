@@ -1,8 +1,10 @@
 package com.blackoperations.treadstone.domain;
 
+import com.blackoperations.treadstone.domain.dto.BirthdayDto;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 
@@ -36,7 +38,9 @@ public class Person {
 
     private String address;
 
-    private LocalDate birthday;
+    @Valid
+    @Embedded
+    private BirthdayDto birthdayDto;
 
     private String job;
 
