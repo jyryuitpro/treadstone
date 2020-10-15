@@ -15,15 +15,15 @@ import java.time.LocalDate;
 @Data
 public class BirthdayDto {
 
-    private int yearOfBirthday;
+    private Integer yearOfBirthday;
 
     @Min(1)
     @Max(12)
-    private int monthOfBirthday;
+    private Integer monthOfBirthday;
 
     @Min(1)
     @Max(31)
-    private int dayOfBirthday;
+    private Integer dayOfBirthday;
 
     public BirthdayDto(LocalDate birthday) {
         this.yearOfBirthday = birthday.getYear();

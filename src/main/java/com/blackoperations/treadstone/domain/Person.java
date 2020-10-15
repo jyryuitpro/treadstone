@@ -22,7 +22,7 @@ public class Person {
 
     // Person객체 PK 아이디 자동생성
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NonNull
