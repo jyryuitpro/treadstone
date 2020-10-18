@@ -1,5 +1,6 @@
 package com.blackoperations.treadstone.controller;
 
+import com.blackoperations.treadstone.controller.dto.PersonDto;
 import com.blackoperations.treadstone.domain.Person;
 import com.blackoperations.treadstone.repository.PersonRepository;
 import com.blackoperations.treadstone.service.PersonService;
@@ -28,6 +29,20 @@ public class PersonController {
     @ResponseStatus(HttpStatus.CREATED)
     public void postPerson(@RequestBody Person person) {
         personService.put(person);
+
+        log.info("person -> {} ", personRepository.findAll());
+    }
+
+    @PutMapping("/{id}")
+    public void modifyPerson(@PathVariable Long id, @RequestBody PersonDto personDto) {
+        personService.modify(id, personDto);
+
+        log.info("person -> {} ", personRepository.findAll());
+    }
+
+    @PatchMapping("/{id}")
+    public void modifyPerson(@PathVariable Long id, String name) {
+        personService.modify(id, name);
 
         log.info("person -> {} ", personRepository.findAll());
     }

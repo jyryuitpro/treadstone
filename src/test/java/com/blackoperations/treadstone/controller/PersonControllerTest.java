@@ -7,8 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -41,6 +40,29 @@ class PersonControllerTest {
                 .andDo(print())
 //                .andExpect(status().isOk()
                 .andExpect(status().isCreated()
+        );
+    }
+
+    @Test
+    void modifyPerson() throws Exception {
+        mockMvc = MockMvcBuilders.standaloneSetup(personController).build();
+        mockMvc.perform(
+                put("/api/person/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"name\": \"martin\", \"age\": 20, \"bloodType\": \"A\"}"))
+                .andDo(print())
+                .andExpect(status().isOk()
+        );
+    }
+
+    @Test
+    void modifyPersonName() throws Exception {
+        mockMvc = MockMvcBuilders.standaloneSetup(personController).build();
+        mockMvc.perform(
+                patch("/api/person/1")
+                        .param("name", "martin2"))
+                .andDo(print())
+                .andExpect(status().isOk()
         );
     }
 }

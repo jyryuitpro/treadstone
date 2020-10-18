@@ -1,7 +1,9 @@
 package com.blackoperations.treadstone.domain;
 
+import com.blackoperations.treadstone.controller.dto.PersonDto;
 import com.blackoperations.treadstone.domain.dto.BirthdayDto;
 import lombok.*;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -60,4 +62,33 @@ public class Person {
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
     private Block block;
+
+    public void set(PersonDto personDto) {
+        if (personDto.getAge() != 0) {
+            this.setAge(personDto.getAge());
+        }
+
+        if (!StringUtils.isEmpty(personDto.getHobby())) {
+            this.setHobby(personDto.getHobby());
+        }
+
+        if (!StringUtils.isEmpty(personDto.getBloodType())) {
+            this.setBloodType(personDto.getBloodType());
+        }
+
+        if (!StringUtils.isEmpty(personDto.getAddress())) {
+            this.setAddress(personDto.getAddress());
+        }
+
+//        if (personDto.getBirthdayDto() != null)
+//            this.setBirthdayDto(new BirthdayDto(personDto.getBirthdayDto()));
+
+        if (!StringUtils.isEmpty(personDto.getJob())) {
+            this.setJob(personDto.getJob());
+        }
+
+        if (!StringUtils.isEmpty(personDto.getPhoneNumber())) {
+            this.setPhoneNumber(personDto.getPhoneNumber());
+        }
+    }
 }
