@@ -1,5 +1,7 @@
 package com.blackoperations.treadstone.controller;
 
+import com.blackoperations.treadstone.repository.PersonRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,17 +13,25 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+//@Slf4j
 @SpringBootTest
 class PersonControllerTest {
 
     @Autowired
     private PersonController personController;
 
+    @Autowired
+    private PersonRepository personRepository;
+
     private MockMvc mockMvc;
+
+    @BeforeEach
+    void beforeEadch() {
+        mockMvc = MockMvcBuilders.standaloneSetup(personController).build();
+    }
 
     @Test
     void getPerson() throws Exception {
-        mockMvc = MockMvcBuilders.standaloneSetup(personController).build();
         mockMvc.perform(
                 get("/api/person/1"))
                 .andDo(print())
@@ -29,10 +39,8 @@ class PersonControllerTest {
         );
     }
 
-
     @Test
     void postPerson() throws Exception {
-        mockMvc = MockMvcBuilders.standaloneSetup(personController).build();
         mockMvc.perform(
                 post("/api/person")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -45,7 +53,6 @@ class PersonControllerTest {
 
     @Test
     void modifyPerson() throws Exception {
-        mockMvc = MockMvcBuilders.standaloneSetup(personController).build();
         mockMvc.perform(
                 put("/api/person/1")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -57,12 +64,22 @@ class PersonControllerTest {
 
     @Test
     void modifyPersonName() throws Exception {
-        mockMvc = MockMvcBuilders.standaloneSetup(personController).build();
         mockMvc.perform(
                 patch("/api/person/1")
                         .param("name", "martin2"))
                 .andDo(print())
                 .andExpect(status().isOk()
         );
+    }
+
+    @Test
+    void deletePerson() throws Exception {
+        mockMvc.perform(
+                delete("/api/person/1"))
+                .andDo(print())
+                .andExpect(status().isOk()
+        );
+
+//        log.info("people deleted -> {} ", personRepository.findPeopleDeleted());
     }
 }

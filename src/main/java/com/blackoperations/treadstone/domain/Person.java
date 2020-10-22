@@ -3,6 +3,8 @@ package com.blackoperations.treadstone.domain;
 import com.blackoperations.treadstone.controller.dto.PersonDto;
 import com.blackoperations.treadstone.domain.dto.BirthdayDto;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.Where;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
@@ -21,6 +23,7 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 //@EqualsAndHashCode
 @Data
+@Where(clause="deleted = false")
 public class Person {
 
     // Person객체 PK 아이디 자동생성
@@ -54,6 +57,10 @@ public class Person {
 
     @ToString.Exclude
     private String phoneNumber;
+
+//    false
+    @ColumnDefault("0")
+    private boolean deleted;
 
 //    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
 //    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
