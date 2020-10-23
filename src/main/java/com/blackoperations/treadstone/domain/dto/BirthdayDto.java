@@ -17,17 +17,17 @@ public class BirthdayDto {
 
     private Integer yearOfBirthday;
 
-    @Min(1)
-    @Max(12)
     private Integer monthOfBirthday;
 
-    @Min(1)
-    @Max(31)
     private Integer dayOfBirthday;
 
-    public BirthdayDto(LocalDate birthday) {
+    private BirthdayDto(LocalDate birthday) {
         this.yearOfBirthday = birthday.getYear();
         this.monthOfBirthday = birthday.getMonthValue();
         this.dayOfBirthday = birthday.getDayOfMonth();
+    }
+
+    public static BirthdayDto of(LocalDate birthday) {
+        return new BirthdayDto(birthday);
     }
 }
