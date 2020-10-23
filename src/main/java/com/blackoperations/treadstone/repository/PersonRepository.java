@@ -12,10 +12,6 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 
     List<Person> findByName(String name);
 
-    List<Person> findByBlockIsNull();
-
-    List<Person> findByBloodType(String bloodType);
-
 //    @Query(value = "select person from Person person where person.birthdayDto.monthOfBirthday = ?1")
 //    List<Person> findByMonthOfBirthday(int monthOfBirthday);
 
